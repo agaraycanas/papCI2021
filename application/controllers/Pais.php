@@ -13,11 +13,14 @@ class Pais extends CI_Controller {
         $this->load->model('Pais_model');
         try {
             $this->Pais_model->c($nombre);
+            /*
             $bu=base_url();
             header("Location:{$bu}pais/r");
+            */
+            infoMsg("País $nombre creado con éxito",'pais/r');
         }
         catch (Exception $e) {
-           info($e->getMessage());
+           errorMsg($e->getMessage(),'pais/c');
         }
     }
 }

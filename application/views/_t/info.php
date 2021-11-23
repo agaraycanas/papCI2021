@@ -1,4 +1,7 @@
 <div class="container">
-<h1>Atención</h1>
-<h3><?=$msg?></h3>
+	<h3 class="alert alert-<?=$severity?>"><?=$msg?></h3>
+
+	<form action="<?=$uri?>">
+		<input type="submit" value="Volver" />
+	</form>
 </div>
