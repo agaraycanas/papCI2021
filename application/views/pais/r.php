@@ -5,7 +5,7 @@
 		<input type="submit" value="Nuevo país"/>
 	</form>
 	
-	<table>
+	<table class="table table-striped">
 		<tr>
 			<th>Nombre</th>
 			<th>Acciones</th>
@@ -17,11 +17,19 @@
 			<td>
 				<?=$pais->nombre?>
 			</td>
-			<td>
+			<td class="row">
+				
 				<form id="idForm" action="<?=base_url().'pais/u'?>" >
 					<input type="hidden" name="idPais" value="<?=$pais->id?>" />
 					<button onclick="document.getElementById('idForm').submit()"> 
 						<img height=15 width="15" src="<?=base_url().'assets/img/lapiz.png'?>">
+					</button>
+				</form>
+				
+				<form id="idForm" action="<?=base_url().'pais/d'?>" method="get">
+					<input type="hidden" name="idPais" value="<?=$pais->id?>" />
+					<button onclick="document.getElementById('idForm').submit()"> 
+						<img height=15 width="15" src="<?=base_url().'assets/img/basura.png'?>">
 					</button>
 				</form>
 			</td>
