@@ -1,5 +1,5 @@
 <div class="container">
-	<form action="<?=base_url()?>pais/uPost" method="post">
+	<form action="<?=base_url()?>persona/uPost" method="post">
 		<h1>Editar persona</h1>
 
 		<label for="id-nombre">Nombre</label>

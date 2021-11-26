@@ -32,7 +32,7 @@ class Persona_model extends CI_Model {
     }
 
     function u($idPersona,$nombre) {
-        $persona=R::load('aficion',$idPersona);
+        $persona=R::load('persona',$idPersona);
         $persona->nombre = $nombre;
         R::store($persona);
     }
