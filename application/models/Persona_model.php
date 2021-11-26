@@ -30,5 +30,27 @@ class Persona_model extends CI_Model {
     public function getAll() {
         return R::findAll('persona');
     }
+
+    function u($idPersona,$nombre) {
+        $persona=R::load('aficion',$idPersona);
+        $persona->nombre = $nombre;
+        R::store($persona);
+    }
+    
+    function getPersonaById($id) {
+        return R::load('persona',$id);
+    }
+    
+    function d($idPersona) {
+        if ($idPersona!=null) {
+            $persona = R::load('persona',$idPersona);
+            if ($persona->id == 0) {
+                throw new Exception("La persona id={$idPersona} no existe");
+            }
+            R::trash($persona);
+        }
+        
+    }
+    
 }
 ?>

@@ -5,6 +5,7 @@ class Persona extends CI_Controller {
         $data['personas'] = $this->Persona_model->getAll();
         frame($this,'persona/r',$data);
     }
+    
     public function c() {
         $this->load->model('Pais_model');
         $data['paises'] = $this->Pais_model->getAll();
@@ -31,5 +32,50 @@ class Persona extends CI_Controller {
             errorMsg($e->getMessage(),'persona/c');
         }
     }
+
+    
+    function u()
+    {
+        $idPersona = isset($_GET['idPersona']) ? $_GET['idPersona'] : null;
+        $this->load->model('Persona_model');
+        $data['persona'] = $this->Persona_model->getPersonaById($idPersona);
+        frame($this, 'persona/u', $data);
+    }
+    
+    function uPost()
+    {
+        $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : 'ninguno';
+        $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : null;
+        
+        $this->load->model('Persona_model');
+        
+        try {
+            $this->Persona_model->u($idPersona, $nombre);
+            redirect(base_url() . 'persona/r');
+        } catch (Exception $e) {
+            errorMsg($e->getMessage(), 'persona/r');
+        }
+    }
+    
+    function d() {
+        $idPersona = isset($_GET['idPersona']) ? $_GET['idPersona'] : null;
+        $this->load->model('Persona_model');
+        $data['persona'] = $this->Persona_model->getPersonaById($idPersona);
+        frame($this,'persona/d',$data);
+    }
+    
+    function dPost()
+    {
+        $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : null;
+        $this->load->model('Persona_model');
+        
+        try {
+            $this->Persona_model->d($idPersona);
+            redirect(base_url().'persona/r');
+        } catch (Exception $e) {
+            errorMsg($e->getMessage(),'persona/r');
+        }
+    }
+    
 }
 ?>

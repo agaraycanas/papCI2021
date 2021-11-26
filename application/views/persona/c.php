@@ -4,7 +4,7 @@
 		<h1>Nueva persona</h1>
 		
 		<label for="id-nombre">Nombre</label>
-		<input id="id-nombre" type="text" name="nombre"/>
+		<input id="id-nombre" type="text" name="nombre" autofocus="autofocus"/>
 		<br/>
 		
 		País de nacimiento
