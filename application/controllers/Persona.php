@@ -37,8 +37,15 @@ class Persona extends CI_Controller {
     function u()
     {
         $idPersona = isset($_GET['idPersona']) ? $_GET['idPersona'] : null;
+        
         $this->load->model('Persona_model');
+        $this->load->model('Pais_model');
+        $this->load->model('Aficion_model');
+        
         $data['persona'] = $this->Persona_model->getPersonaById($idPersona);
+        $data['paises'] = $this->Pais_model->getAll();
+        $data['aficiones'] = $this->Aficion_model->getAll();
+        
         frame($this, 'persona/u', $data);
     }
     
@@ -46,11 +53,14 @@ class Persona extends CI_Controller {
     {
         $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : 'ninguno';
         $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : null;
+        $idPaisNace = isset($_POST['idPaisNace']) ? $_POST['idPaisNace'] : null;
+        $idPaisVive = isset($_POST['idPaisVive']) ? $_POST['idPaisVive'] : null;
+        $idsAficionGusta = isset($_POST['idAficionGusta']) ? $_POST['idAficionGusta'] : [] ;
         
         $this->load->model('Persona_model');
         
         try {
-            $this->Persona_model->u($idPersona, $nombre);
+            $this->Persona_model->u($idPersona, $nombre, $idPaisNace, $idPaisVive, $idsAficionGusta);
             redirect(base_url() . 'persona/r');
         } catch (Exception $e) {
             errorMsg($e->getMessage(), 'persona/r');

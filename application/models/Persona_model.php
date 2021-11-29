@@ -31,9 +31,34 @@ class Persona_model extends CI_Model {
         return R::findAll('persona');
     }
 
-    function u($idPersona,$nombre) {
+    function u($idPersona,$nombre,$idPaisNace,$idPaisVive,$idsAficionGusta) {
+        
         $persona=R::load('persona',$idPersona);
         $persona->nombre = $nombre;
+        $persona->nace = R::load('pais',$idPaisNace);
+        $persona->vive_id = $idPaisVive;
+        
+        $idsComunes = [];
+        
+        foreach ($persona->ownGustoList as $gusto) {
+            if (in_array($gusto->aficion_id,$idsAficionGusta)) {
+               $idsComunes[] = $gusto->aficion_id; 
+            }
+            else {
+                R::store($persona);
+                R::trash($gusto);
+            }
+        }
+        
+        foreach (array_diff($idsAficionGusta, $idsComunes) as $idAficion) {
+            $aficion = R::load('aficion',$idAficion);
+            $gusto = R::dispense('gusto');
+            $gusto->persona = $persona;
+            $gusto->aficion = $aficion;
+            R::store($persona);
+            R::store($gusto);
+        }
+        
         R::store($persona);
     }
     
