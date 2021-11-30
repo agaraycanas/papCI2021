@@ -45,6 +45,22 @@
     		<?php endforeach;?>
     		
 		</fieldset>
+
+		<fieldset>
+    		<legend>
+	    		Aficiones que odia
+    		</legend>
+    		
+    		<?php $idAficionesOdia = [];foreach ($persona->ownOdioList as $odio) {$idAficionesOdia[] = $odio->aficion_id;}?>
+    		<?php foreach ($aficiones as $aficion): ?>
+    			<input id ="ido-<?=$aficion->id?>" type="checkbox" value="<?=$aficion->id?>" name="idAficionOdia[]"
+    			<?= in_array($aficion->id,$idAficionesOdia) ? 'checked="checked"' : '' ?>
+    			/>
+    			<label for="ido-<?=$aficion->id?>" ><?=$aficion->nombre?></label>
+			    		
+    		<?php endforeach;?>
+    		
+		</fieldset>
 		
 		
 		<input type="hidden" name="idPersona" value="<?=$persona->id?>" />

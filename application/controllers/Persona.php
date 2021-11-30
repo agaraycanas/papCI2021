@@ -56,11 +56,12 @@ class Persona extends CI_Controller {
         $idPaisNace = isset($_POST['idPaisNace']) ? $_POST['idPaisNace'] : null;
         $idPaisVive = isset($_POST['idPaisVive']) ? $_POST['idPaisVive'] : null;
         $idsAficionGusta = isset($_POST['idAficionGusta']) ? $_POST['idAficionGusta'] : [] ;
+        $idsAficionOdia = isset($_POST['idAficionOdia']) ? $_POST['idAficionOdia'] : [] ;
         
         $this->load->model('Persona_model');
         
         try {
-            $this->Persona_model->u($idPersona, $nombre, $idPaisNace, $idPaisVive, $idsAficionGusta);
+            $this->Persona_model->u($idPersona, $nombre, $idPaisNace, $idPaisVive, $idsAficionGusta, $idsAficionOdia);
             redirect(base_url() . 'persona/r');
         } catch (Exception $e) {
             errorMsg($e->getMessage(), 'persona/r');
