@@ -1,6 +1,18 @@
 <?php
 class Persona_model extends CI_Model {
-    public function c($nombre,$idPaisNace,$idPaisVive,$idsAficionGusta,$idsAficionOdia) {
+    
+    public function login($nombre,$password) {
+        $persona = R::findOne('persona','nombre=?',[$nombre]);
+        if ($persona==null) {
+            throw new Exception('Usuario inválido');
+        }
+        if (! password_verify( $password, $persona->password )) {
+            throw new Exception('Contraseña inválida');
+        }
+        return $persona;
+    }
+    
+    public function c($nombre,$password,$idPaisNace,$idPaisVive,$idsAficionGusta,$idsAficionOdia) {
         
         if ($idPaisNace==null) {
             throw new Exception("ID País no puede ser nulo");
@@ -8,6 +20,7 @@ class Persona_model extends CI_Model {
         
         $persona = R::dispense('persona');
         $persona->nombre = $nombre;
+        $persona->password = password_hash($password, PASSWORD_BCRYPT);
         $persona->nace = R::load('pais',$idPaisNace);
         $persona->vive = R::load('pais',$idPaisVive);
         foreach ($idsAficionGusta as $idAficionGusta) {
