@@ -1,0 +1,9 @@
+ROLES
+
+anon
+	r pais
+	r aficion
+auth
+	r persona
+admin
+	cud persona, pais, aficion
