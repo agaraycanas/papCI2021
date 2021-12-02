@@ -7,10 +7,12 @@ class Aficion extends CI_Controller {
     }
     
     function c() {
+        rolAutorizado(['admin']);
         frame($this,'aficion/c');
     }
     
     function cPost() {
+        rolAutorizado(['admin']);
         $nombre = isset($_POST['nombre'])?$_POST['nombre']:'ninguno';
         $this->load->model('Aficion_model');
         try {
@@ -24,6 +26,7 @@ class Aficion extends CI_Controller {
 
     function u()
     {
+        rolAutorizado(['admin']);
         $idAficion = isset($_GET['idAficion']) ? $_GET['idAficion'] : null;
         $this->load->model('Aficion_model');
         $data['aficion'] = $this->Aficion_model->getAficionById($idAficion);
@@ -32,6 +35,7 @@ class Aficion extends CI_Controller {
     
     function uPost()
     {
+        rolAutorizado(['admin']);
         $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : 'ninguno';
         $idAficion = isset($_POST['idAficion']) ? $_POST['idAficion'] : null;
         
@@ -46,6 +50,7 @@ class Aficion extends CI_Controller {
     }
     
     function d() {
+        rolAutorizado(['admin']);
         $idAficion = isset($_GET['idAficion']) ? $_GET['idAficion'] : null;
         $this->load->model('Aficion_model');
         $data['aficion'] = $this->Aficion_model->getAficionById($idAficion);
@@ -54,6 +59,7 @@ class Aficion extends CI_Controller {
     
     function dPost()
     {
+        rolAutorizado(['admin']);
         $idAficion = isset($_POST['idAficion']) ? $_POST['idAficion'] : null;
         $this->load->model('Aficion_model');
         

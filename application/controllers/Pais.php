@@ -35,6 +35,7 @@ class Pais extends CI_Controller
 
     function u()
     {
+        rolAutorizado(['admin']);
         $idPais = isset($_GET['idPais']) ? $_GET['idPais'] : null;
         $this->load->model('Pais_model');
         $data['pais'] = $this->Pais_model->getPaisById($idPais);
@@ -43,6 +44,7 @@ class Pais extends CI_Controller
 
     function uPost()
     {
+        rolAutorizado(['admin']);
         $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : 'ninguno';
         $idPais = isset($_POST['idPais']) ? $_POST['idPais'] : null;
 
@@ -57,6 +59,7 @@ class Pais extends CI_Controller
     }
 
     function d() {
+        rolAutorizado(['admin']);
         $idPais= isset($_GET['idPais']) ? $_GET['idPais'] : null;
         $this->load->model('Pais_model');
         $data['pais'] = $this->Pais_model->getPaisById($idPais);
@@ -65,6 +68,7 @@ class Pais extends CI_Controller
     
     function dPost()
     {
+        rolAutorizado(['admin']);
         $idPais = isset($_POST['idPais']) ? $_POST['idPais'] : null;
         $this->load->model('Pais_model');
 
