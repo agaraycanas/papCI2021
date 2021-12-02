@@ -12,12 +12,13 @@ class Pais extends CI_Controller
 
     function c()
     {
-        rolAutorizado('admin');
+        rolAutorizado(['admin']);
         frame($this, 'pais/c');
     }
 
     function cPost()
     {
+        rolAutorizado(['admin']);
         $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : 'ninguno';
         $this->load->model('Pais_model');
         try {

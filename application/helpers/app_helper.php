@@ -22,7 +22,7 @@ function errorMsg($mensaje,$uri='') {
 }
 
 
-function rolAutorizado($rolAutorizado) {
+function rolAutorizado($rolesAutorizados) {
     $rolActual='anon';
     if (session_status()==PHP_SESSION_NONE) {
         session_start();
@@ -34,7 +34,7 @@ function rolAutorizado($rolAutorizado) {
         }
     }
     
-    if ($rolActual!=$rolAutorizado) {
+    if (!in_array($rolActual,$rolesAutorizados)) {
         errorMsg('Rol inadecuado');
     }
 }
