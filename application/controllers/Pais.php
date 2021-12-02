@@ -12,6 +12,7 @@ class Pais extends CI_Controller
 
     function c()
     {
+        rolAutorizado('admin');
         frame($this, 'pais/c');
     }
 

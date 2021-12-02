@@ -19,6 +19,14 @@ class Persona extends CI_Controller {
         }
     }
     
+    public function logout() {
+        if (session_status() == PHP_SESSION_NONE) {session_start ();}
+        if (isset($_SESSION['usuario'])) {
+            unset($_SESSION['usuario']);
+        }
+        redirect(base_url());
+    }
+    
     public function r() {
         $this->load->model('Persona_model');
         $data['personas'] = $this->Persona_model->getAll();

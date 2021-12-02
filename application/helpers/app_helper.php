@@ -1,7 +1,9 @@
 <?php
 function infoMsg($mensaje,$uri='') {
     $bu=base_url();
-    session_start();
+    if (session_status()==PHP_SESSION_NONE) {
+        session_start();
+    }
     $_SESSION['_msg']['text']=$mensaje;
     $_SESSION['_msg']['severity']='success';
     $_SESSION['_msg']['uri']=$uri;
@@ -10,11 +12,30 @@ function infoMsg($mensaje,$uri='') {
 
 function errorMsg($mensaje,$uri='') {
     $bu=base_url();
-    session_start();
+    if (session_status()==PHP_SESSION_NONE) {
+        session_start();
+    }
     $_SESSION['_msg']['text']=$mensaje;
     $_SESSION['_msg']['severity']='danger';
     $_SESSION['_msg']['uri']=$uri;
     header("Location:{$bu}info");
 }
 
+
+function rolAutorizado($rolAutorizado) {
+    $rolActual='anon';
+    if (session_status()==PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (isset ($_SESSION['usuario'])) {
+        $rolActual='auth';
+        if (isset($_SESSION['usuario']->admin) && $_SESSION['usuario']->admin) {
+            $rolActual = 'admin';
+        }
+    }
+    
+    if ($rolActual!=$rolAutorizado) {
+        errorMsg('Rol inadecuado');
+    }
+}
 ?>

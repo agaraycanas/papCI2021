@@ -21,6 +21,7 @@ class Persona_model extends CI_Model {
         $persona = R::dispense('persona');
         $persona->nombre = $nombre;
         $persona->password = password_hash($password, PASSWORD_BCRYPT);
+        $persona->admin = false;
         $persona->nace = R::load('pais',$idPaisNace);
         $persona->vive = R::load('pais',$idPaisVive);
         foreach ($idsAficionGusta as $idAficionGusta) {
