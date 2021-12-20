@@ -1,25 +1,32 @@
 <div class="container jumbotron">
-	<div class="row">
-		<form action="<?=base_url()?>pais/r">
+	<h1>Lotería familiar</h1>
+		<form action="<?=base_url()?>boleto/r">
 			<button>
-				Países <img src="<?=base_url()?>assets/img/paises.png" height="70"
+				Ver boletos<img src="<?=base_url()?>assets/img/boleto.jfif" height="70"
 					width="170" />
 			</button>
 		</form>
 
 		<form action="<?=base_url()?>aficion/r">
 			<button>
-				Aficiones <img src="<?=base_url()?>assets/img/aficiones.jpg"
+				Compartir boleto <img src="<?=base_url()?>assets/img/dar.jpg"
 					height="70" width="170" />
 			</button>
 		</form>
 
 		<form action="<?=base_url()?>persona/r">
 			<button>
-				Personas <img src="<?=base_url()?>assets/img/personas.jpg"
+				Tipo de premio <img src="<?=base_url()?>assets/img/premio.png"
 					height="70" width="170" />
 			</button>
 		</form>
-	</div>
+		
+		<form action="<?=base_url()?>persona/r">
+			<button>
+				Registrar premio<img src="<?=base_url()?>assets/img/gordo.jfif"
+					height="70" width="170" />
+			</button>
+		</form>
+		
 
 </div>

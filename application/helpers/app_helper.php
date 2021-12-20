@@ -29,7 +29,7 @@ function rolAutorizado($rolesAutorizados) {
     }
     if (isset ($_SESSION['usuario'])) {
         $rolActual='auth';
-        if (isset($_SESSION['usuario']->admin) && $_SESSION['usuario']->admin) {
+        if (isset($_SESSION['usuario']) && $_SESSION['usuario']->nombre=='admin') {
             $rolActual = 'admin';
         }
     }

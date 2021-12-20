@@ -1,48 +1,32 @@
 <?php
-class Persona_model extends CI_Model {
+class Usuario_model extends CI_Model {
     
-    public function login($nombre,$password) {
-        $persona = R::findOne('persona','nombre=?',[$nombre]);
-        if ($persona==null) {
-            throw new Exception('Usuario inválido');
-        }
-        if (! password_verify( $password, $persona->password )) {
-            throw new Exception('Contraseña inválida');
-        }
-        return $persona;
+    public function init() {
+       R::nuke();
+       $this->c('admin','admin');
     }
     
-    public function c($nombre,$password,$idPaisNace,$idPaisVive,$idsAficionGusta,$idsAficionOdia) {
+    public function login($nombre,$password) {
+        $usuario = R::findOne('usuario','nombre=?',[$nombre]);
+        if ($usuario==null) {
+            throw new Exception('Usuario inválido');
+        }
+        if (! password_verify( $password, $usuario->password )) {
+            throw new Exception('Contraseña inválida');
+        }
+        return $usuario;
+    }
+    
+    public function c($nombre,$password) {
         
-        if ($idPaisNace==null) {
-            throw new Exception("ID País no puede ser nulo");
-        }
-        
-        $persona = R::dispense('persona');
-        $persona->nombre = $nombre;
-        $persona->password = password_hash($password, PASSWORD_BCRYPT);
-        $persona->admin = false;
-        $persona->nace = R::load('pais',$idPaisNace);
-        $persona->vive = R::load('pais',$idPaisVive);
-        foreach ($idsAficionGusta as $idAficionGusta) {
-            $aficionGusta = R::load('aficion',$idAficionGusta);
-            $gusto = R::dispense('gusto');
-            $gusto->persona = $persona;
-            $gusto->aficion = $aficionGusta;
-            R::store($gusto);
-        }
-        foreach ($idsAficionOdia as $idAficionOdia) {
-            $aficionOdia = R::load('aficion',$idAficionOdia);
-            $odio = R::dispense('odio');
-            $odio->persona = $persona;
-            $odio->aficion = $aficionOdia;
-            R::store($odio);
-        }
-        R::store($persona);
+        $usuario = R::dispense('usuario');
+        $usuario->nombre = $nombre;
+        $usuario->password = password_hash($password, PASSWORD_BCRYPT);
+        R::store($usuario);
     }
     
     public function getAll() {
-        return R::findAll('persona');
+        return R::findAll('usuario');
     }
 
     function u($idPersona,$nombre,$idPaisNace,$idPaisVive,$idsAficionGusta,$idsAficionOdia) {
@@ -113,6 +97,10 @@ class Persona_model extends CI_Model {
             }
             R::trash($persona);
         }
+    }
+    
+    public function getAllExcept($usuario) {
+        return R::findAll('usuario',"id<>? and nombre<>'admin'",[$usuario->id]);
     }
 }
 ?>

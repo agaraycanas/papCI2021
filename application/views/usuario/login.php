@@ -1,7 +1,7 @@
 <div class="container">
 <h1>Iniciar sesión</h1>
 
-<form action="<?=base_url()?>persona/loginPost" method="post">
+<form action="<?=base_url()?>usuario/loginPost" method="post">
 		<label for="id-nombre">Nombre</label>
 		<input id="id-nombre" type="text" name="nombre" autofocus="autofocus"/>
 		<br/>
