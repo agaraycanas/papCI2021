@@ -1,3 +1,29 @@
+<?php 
+function propietario($boleto) {
+    $propietario = null;
+    foreach ($boleto->ownParticipacionList as $participacion) {
+        if ($participacion->esPropio) {
+            $propietario = $participacion->usuario;
+        }
+    }
+    return $propietario;
+}
+
+function compartido($boleto) {
+    return ($boleto->countOwn('participacion')>1);
+}
+
+function listaGorrones($boleto,$idParticipacion) {
+    $lista ='';
+    foreach ($boleto->ownParticipacionList as $participacion) {
+        if ($participacion->id != $idParticipacion) {
+            $lista .= ($participacion->usuario->nombre . '(' .$participacion->cantidad .') ');
+        }
+    }
+    return $lista;
+}
+?>
+
 <div class="container">
 	<h1>Lista de boletos</h1>
 	
@@ -10,6 +36,7 @@
 			<th>Número</th>
 			<th>Participación</th>
 			<th>¿Propio?</th>
+			<th>Compartido con ... </th>
 			<th>Acciones </th>
 		</tr>
 		
@@ -18,12 +45,24 @@
 				<td>
 					<?=$participacion->boleto->numero?>
 				</td>
+				
 				<td>
 					<?=$participacion->cantidad?>
 				</td>
+				
 				<td>
-					<?=$participacion->esPropio?'SÍ':'NO'?>
+					<?= $participacion->esPropio ? 'SÍ':'NO'?>
+					<?php if (! $participacion->esPropio):?>
+					(<?= (propietario($participacion->boleto))->nombre?>)
+					<?php endif;?>
 				</td>
+				
+				<td>
+					<?php if (($participacion->esPropio) && compartido($participacion->boleto)):?>
+					<?= (listaGorrones($participacion->boleto,$participacion->id))?>
+					<?php endif;?>
+				</td>
+				
 				<td class="row">
     				<form id="idFormU" action="<?=base_url().'participacion/compartir'?>" >
     					<input type="hidden" name="idParticipacion" value="<?=$participacion->id?>"/>

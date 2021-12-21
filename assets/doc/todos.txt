@@ -1,0 +1,10 @@
+- C participacion: Si se comparte el mismo número con 
+	la misma persona, actualizar la participacion existente
+	y no crear una nueva
+- R boleto: Lapicito para incrementar participación
+
+======= HECHO =============
+
+* C boleto: sólo "reciclar" un boleto existente 
+	si es propiedad del usuario que ha hecho login.
+	Si no, crear uno nuevo
