@@ -22,8 +22,7 @@ class Participacion extends CI_Controller
                 }
             }
             if (! $permitido) {
-                throw new Exception($usario->id.'//'.); // TODO DEBUG
-                //throw new Exception('No puedes compartir un boleto que no te pertenece');
+                throw new Exception('No puedes compartir un boleto que no te pertenece');
             }
             
             $this->load->model('Participacion_model');
@@ -50,10 +49,11 @@ class Participacion extends CI_Controller
         }
         try {
             $this->Participacion_model->compartir($_SESSION['usuario'],$numero, $cantidad, $idUsuario);
-            redirect(base_url().'participacion/compartir');
+            redirect(base_url().'boleto/r');
         }
         catch (Exception $e) {
-            errorMsg($e->getMessage());
+            //errorMsg($e->getMessage());
+            errorMsg("ERROR al compartir");
         }
     }
 }

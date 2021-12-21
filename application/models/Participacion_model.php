@@ -22,6 +22,9 @@ class Participacion_model extends CI_Model {
         $participacionGorrona->usuario = $usuarioGorron;
         $participacionGorrona->boleto = $participacionACompartir->boleto;
         
+        R::store($participacionGorrona);
+        
         $participacionACompartir->cantidad -= $cantidad;
+        R::store($participacionACompartir);
     }
 }

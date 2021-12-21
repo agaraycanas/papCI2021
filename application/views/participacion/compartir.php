@@ -23,6 +23,7 @@
 			<?php endforeach;?>
 		</select>
 		
+		<br/>
 		<input type="submit"/>
 		
 	</form>
